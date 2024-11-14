@@ -1,6 +1,8 @@
 import { ReactNode, useContext, useEffect } from 'react';
 import {createContext, useState} from 'react'
-import { checkAuthStatus, loginUser } from '../helpers/api-communicator';
+import { checkAuthStatus, loginUser, logoutUser, signUpUser } from '../helpers/api-communicator';
+import toast from 'react-hot-toast';
+
 type User={
     name:string,
     email:string,
@@ -37,10 +39,29 @@ export const AuthProvider=({children}:{children:ReactNode})=>{
             setIsLoggedIn(true);
         }
     };
-    const signUp=async(name:string,email:string,password:string)=>{};
-    const logout=async()=>{};
+    const signUp=async(name:string,email:string,password:string)=>{
+        const data=await signUpUser(name,email,password);
+        if(data){
+            setUser({email:data.email,name:data.name})
+            setIsLoggedIn(true);
+        }
+    };
 
 
+    const logout=async()=>{
+  
+      
+        try{
+          await logoutUser();
+          
+          setIsLoggedIn(false);
+          setUser(null);
+          
+        }catch(err){
+          toast.error("Logout failed.")
+        }
+       
+    }
     const value={
         user,
         isLoggedIn,

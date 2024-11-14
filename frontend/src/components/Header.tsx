@@ -3,8 +3,11 @@ import React from 'react'
 import Logo from './shared/Logo'
 import { useAuth } from '../context/AuthContext'
 import NavigationLink from './shared/NavigationLink'
+import { logoutUser } from '../helpers/api-communicator'
+import toast from 'react-hot-toast'
 const Header = () => {
     const auth=useAuth();
+   
   return (
 <AppBar sx={{bgcolor:"transparent",position:"static",boxShadow:"none"}}>
         <Toolbar sx={{display:"flex",}}>

@@ -10,15 +10,15 @@ import { Routes ,Route} from 'react-router-dom'
 import { useAuth } from './context/AuthContext'
 
 function App() {
- console.log(useAuth()?.isLoggedIn)
-
+//  console.log(useAuth()?.isLoggedIn)
+const auth=useAuth();
   return <main>
     <Header/>
     <Routes>
 <Route path="/" element={<Home />} />
 <Route path="/login" element={<Login />} />
 <Route path="/signup" element={<SignUp />} />
-<Route path="/chat" element={<Chat />} />
+{auth?.isLoggedIn && auth.user &&<Route path="/chat" element={<Chat />} />}
 <Route path="*" element={<NotFound />} />
 </Routes>
   </main>

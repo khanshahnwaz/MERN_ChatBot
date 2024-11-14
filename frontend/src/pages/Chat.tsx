@@ -1,30 +1,44 @@
 import { Avatar, Box, Button, IconButton, Typography } from '@mui/material'
 import { useAuth } from '../context/AuthContext'
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { red } from '@mui/material/colors';
 import ChatItem from '../components/chat/ChatItem';
 import { IoMdSend } from 'react-icons/io';
-import { getChats, sendChatRequest } from '../helpers/api-communicator';
-
+import { deleteChats, getChats, sendChatRequest } from '../helpers/api-communicator';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 type Message={
   role:string,
   content:string
 };
 const Chat = () => {
+  const navigate=useNavigate();
   const inputRef=useRef<HTMLInputElement|null>(null)
   const auth=useAuth();
   
   const [chatMessages,setChatMessages]=useState<Message[]>([]);
 
-  // get the chats
   useEffect(()=>{
-    const getData=async ()=>{
-    const data=await getChats();
-    console.log(data);
-    setChatMessages(data.chats);
-  }
-  getData();
-  },[])
+    if(!auth?.user)
+      return navigate("/login");
+  })
+  // get the chats
+  useLayoutEffect(() => {
+    if (auth?.isLoggedIn && auth.user) {
+      toast.loading("Loading Chats", { id: "loadchats" });
+      getChats()
+        .then((data) => {
+          setChatMessages([...data.chats]);
+          toast.success("Successfully loaded chats", { id: "loadchats" });
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error("Loading Failed", { id: "loadchats" });
+        });
+    }
+  }, [auth]);
+
+
   const handleSubmit=async ()=>{
     const content=inputRef.current?.value as string;
    if(inputRef && inputRef.current){
@@ -38,8 +52,24 @@ const Chat = () => {
     const chatData= await sendChatRequest(content);
     setChatMessages([...chatData.chats])
   }
-
   
+  // delete chats
+  
+  const handleDeleteChats= async()=>{
+    try{
+toast.loading("Deleting chats.")
+    
+ await deleteChats();
+  
+    toast.success("Chats deleted.")
+    setChatMessages([])
+  
+  
+    }catch(error){
+     toast.error("Unable to delete chats.")
+    }
+  
+  }
   
   return (
     <Box
@@ -53,7 +83,7 @@ const Chat = () => {
   }}
 >
   {/* First Box: Fixed size on larger screens, hidden on smaller ones */}
-  <Box sx={{ display: { md: 'flex', xs: 'none', sm: 'flex' }, flexShrink: 0 }}>
+  <Box sx={{ display: { md: 'flex', xs: 'none', sm: 'none' }, flexShrink: 0 }}>
     <Box
       sx={{
         display: 'flex',
@@ -76,6 +106,7 @@ const Chat = () => {
         You can ask some questions related to programming, business, education, etc.
       </Typography>
       <Button
+      onClick={handleDeleteChats}
         sx={{
           width: '200px',
           my: 'auto',
@@ -110,7 +141,7 @@ const Chat = () => {
         fontSize: '48px',
         color: 'white',
         mx: 'auto',
-        width: 'max-content',
+        
         fontWeight: 600
       }}
     >
