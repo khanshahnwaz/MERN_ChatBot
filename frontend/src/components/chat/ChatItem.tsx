@@ -1,7 +1,5 @@
-import React from "react"
 import { useEffect,useState } from "react";
 import { Avatar, Box, Typography } from "@mui/material"
-import { useAuth } from "../../context/AuthContext"
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { coldarkDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
@@ -43,7 +41,6 @@ function isCodeBlock(str:String){
 }
 const ChatItem = ({content,role}:{content:string,role:string}) => {
 
-  const auth=useAuth();
 
 const messageBlocks=extractCodeFromString(content);
 
