@@ -62,12 +62,11 @@ const navigate=useNavigate();
               justifyContent: "center",
             }}
           >
-            <Typography
-             
+            <Typography 
              variant="h4"
              textAlign="center"
              padding={2}
-             fontweight={600}
+             fontWeight={600}
             
            >
               Login

@@ -1,5 +1,4 @@
 import { Box, useMediaQuery,useTheme } from '@mui/material'
-import React from 'react'
 import TypeAnim from '../components/typer/TypeAnim'
 import Footer from "../components/footer/Footer"
 const Home = () => {

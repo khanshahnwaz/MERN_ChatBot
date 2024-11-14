@@ -3,7 +3,6 @@ import { IoLogInOutline } from "react-icons/io5";
 import CustomizedInput from "../components/shared/CustomizedInput";
 import { useAuth } from "../context/AuthContext";
 import toast from "react-hot-toast";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
@@ -60,13 +59,14 @@ const navigate=useNavigate();
             }}
           >
             <Typography
-              variant="h4"
+             variant="h4"
               textAlign="center"
               padding={2}
-              fontweight={600}
+              fontWeight={600}
             >
               SignUp
             </Typography>
+           
             <CustomizedInput type="text" name="name" label="Name"/>
             <CustomizedInput type="email" name="email" label="Email"/>
             <CustomizedInput type="password" name="password" label="Password"/>
