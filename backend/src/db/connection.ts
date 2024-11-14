@@ -4,12 +4,13 @@ export default async function connectTODatabase() {
     try{
         await connect(process.env.MONGODB_URL)
     }catch(error){
+        // console.log(error)
         throw new Error("Cannot connect to mongodb")
     }
 }
 
 // if anything happens then disonnect from database
-
+   
 async function disconnectFromDatabase(){
     try{
         await disconnect();

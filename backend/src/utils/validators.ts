@@ -31,3 +31,11 @@ export const signUpValidator=[
     body("password").trim().isLength({min:3}).withMessage("Password should contains atlease 3 letters."),
 
 ]
+
+
+
+export const chatCompletionValidator=[
+    body("message").notEmpty().withMessage("Message is required."),
+  
+
+]
