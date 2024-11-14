@@ -63,11 +63,13 @@ const navigate=useNavigate();
             }}
           >
             <Typography
-              variant="h4"
-              textAlign="center"
-              padding={2}
-              fontweight={600}
-            >
+             
+             variant="h4"
+             textAlign="center"
+             padding={2}
+             fontweight={600}
+            
+           >
               Login
             </Typography>
             <CustomizedInput type="email" name="email" label="Email"/>

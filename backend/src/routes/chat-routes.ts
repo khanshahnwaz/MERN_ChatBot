@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { verifyToken } from "../utils/token-manager.js";
 import { chatCompletionValidator, validate } from "../utils/validators.js";
-import { generateChatCompletion, getChats } from "../controllers/chat-controllers.js";
+import { deleteChats, generateChatCompletion, getChats } from "../controllers/chat-controllers.js";
 
 
 // Protected API
@@ -10,4 +10,8 @@ chatRoutes.post('/new',validate(chatCompletionValidator),verifyToken,generateCha
 
 
 chatRoutes.get('/',verifyToken,getChats)
+
+
+chatRoutes.delete('/deleteChats',verifyToken,deleteChats)
+
 export default chatRoutes;
