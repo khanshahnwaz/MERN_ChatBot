@@ -9,8 +9,22 @@ config();
 const app=express();
 // middlewwares
 // allow our frontend server to make request on our server
-app.use(cors({origin:"https://mern-chat-bot-gules.vercel.app/",credentials:true}))
-app.use(express.json())
+const corsOptions = {
+    origin: (origin, callback) => {
+        const allowedOrigins = ['https://profile-manage-frontend.vercel.app', 'http://localhost:5174']; // Add frontend URLs
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+};
+app.options('*', cors(corsOptions));  // Handle preflight requests globally
+
+app.use(cors(corsOptions));app.use(express.json())
 app.use(cookieParser(process.env.COOKIE_SECRET))
 // remove it in production
 // gives you log description of api calls

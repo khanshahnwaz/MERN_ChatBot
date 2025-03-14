@@ -86,12 +86,6 @@ export const verifyUser = async (req, res, next) => {
 export const logoutUser = async (req, res, next) => {
     try {
         console.log("logging out");
-        // const user=await User.findById({email:res.locals.jwtData.id})
-        //         if(!user)
-        //             return res.status(401).send("User not registered or token malfunctioned.");
-        // console.log("user found ")
-        //         if(user._id.toString()!==res.locals.jwtData.id)
-        //             return res.status(401).send("Permission did not match.");
         // clear old cookie
         res.clearCookie(COOKIE_NAME, {
             path: "/",
