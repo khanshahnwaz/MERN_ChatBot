@@ -1,6 +1,5 @@
 import app from "./app.js"
 import connectTODatabase from "./db/connection.js"
-import cors from 'cors'
 
 
 
