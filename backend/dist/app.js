@@ -11,7 +11,7 @@ const app = express();
 // allow our frontend server to make request on our server
 const corsOptions = {
     origin: (origin, callback) => {
-        const allowedOrigins = ['https://profile-manage-frontend.vercel.app', 'http://localhost:5174']; // Add frontend URLs
+        const allowedOrigins = ['https://profile-manage-frontend.vercel.app', 'http://localhost:5173']; // Add frontend URLs
         if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
         }

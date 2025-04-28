@@ -21,4 +21,10 @@ export default defineConfig({
       external: ['react', 'react-dom'], // Avoid marking react as external, ensure it's bundled
     },
   },
+  // resolve: {
+  //   alias: {
+  //     react: require.resolve('react'),
+  //     react-dom: require.resolve('react-dom')
+  //   }
+  // }
 });
