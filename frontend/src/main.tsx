@@ -11,7 +11,7 @@ import axios from 'axios'
 import { Auth0Provider } from '@auth0/auth0-react';
 // set base url for api calls 
 // axios.defaults.baseURL="http://localhost:5000/api/v1";
-axios.defaults.baseURL="https://mern-chat-bot-8qil.vercel.app";
+axios.defaults.baseURL="https://mern-chat-bot-8qil.vercel.app/api/v1";
 // thi will help to exchange cookie 
 axios.defaults.withCredentials=true
 
