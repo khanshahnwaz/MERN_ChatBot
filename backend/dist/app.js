@@ -30,6 +30,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 // remove it in production
 // gives you log description of api calls
 app.use(mogran("dev"));
+app.get("/", (req, res) => res.send("Hello I am working fine"));
 app.use("/api/v1", appRouter);
 export default app;
 //# sourceMappingURL=app.js.map
