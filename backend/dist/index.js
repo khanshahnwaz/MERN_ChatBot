@@ -14,4 +14,5 @@ try {
 catch (err) {
     console.error('Error during server startup:', err);
 }
+export default app;
 //# sourceMappingURL=index.js.map
