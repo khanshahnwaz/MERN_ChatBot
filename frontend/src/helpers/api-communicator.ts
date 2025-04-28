@@ -11,8 +11,9 @@ export const signUpUser=async(name:String,email:string,password:string)=>{
 }
 
 export const loginUser=async(email:string,password:string)=>{
+    console.log("Calling login")
     const res= await axios.post("/users/login",{email,password});
-    // console.log(res)
+    console.log(res)
     if(res.status!=200){
         throw new Error("Unable to login.")
     }
