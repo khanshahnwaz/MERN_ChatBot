@@ -4,6 +4,11 @@ import connectTODatabase from "./db/connection.js";
 const PORT = process.env.PORT || 5000;
 connectTODatabase().then(() => {
     // connections and listeners
-    app.listen(PORT, () => console.log("Server running 5000 and connected to database"));
+    if (process.env.NODE_ENV !== 'production') {
+        const PORT = process.env.PORT || 5000;
+        app.listen(PORT, () => {
+            console.log(`Server running on port ${PORT}`);
+        });
+    }
 }).catch((err) => { console.log(err); });
 //# sourceMappingURL=index.js.map
