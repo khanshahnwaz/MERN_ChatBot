@@ -6,7 +6,7 @@ export default async function connectTODatabase() {
     }
     catch (error) {
         // console.log(error)
-        throw new Error("Cannot connect to mongodb");
+        throw new Error("Cannot connect to mongodb, error ", error);
     }
 }
 // if anything happens then disonnect from database
