@@ -2,6 +2,9 @@ import { connect, disconnect } from 'mongoose';
 // connect function to connect mongo db database
 export default async function connectTODatabase() {
     try {
+        if (!process.env.MONGODB_URL) {
+            throw new Error('Please define the MONGODB_URI environment variable');
+          }
         await connect(process.env.MONGODB_URL);
     }
     catch (error) {
