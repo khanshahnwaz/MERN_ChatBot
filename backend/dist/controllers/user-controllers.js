@@ -29,13 +29,13 @@ export const userSignUp = async (req, res, next) => {
         res.clearCookie(COOKIE_NAME, {
             path: "/",
             httpOnly: true,
-            domain: "localhost", signed: true
+            domain: process.env.DOMNAIN, signed: true
         });
         // create token and store cookie 
         const token = createToken(user._id.toString(), user.email, "7d");
         const expires = new Date();
         expires.setDate(expires.getDate() + 7);
-        res.cookie(COOKIE_NAME, token, { path: "/", domain: "localhost", expires, httpOnly: true, signed: true });
+        res.cookie(COOKIE_NAME, token, { path: "/", domain: process.env.DOMNAIN, expires, httpOnly: true, signed: true });
         return res.status(201).json({ message: "OK", name: user.name, email: user.email });
     }
     catch (error) {
@@ -58,12 +58,12 @@ export const userLogin = async (req, res, next) => {
         res.clearCookie(COOKIE_NAME, {
             path: "/",
             httpOnly: true,
-            domain: "localhost", signed: true
+            domain: process.env.DOMNAIN, signed: true
         });
         const token = createToken(user._id.toString(), user.email, "7d");
         const expires = new Date();
         expires.setDate(expires.getDate() + 7);
-        res.cookie(COOKIE_NAME, token, { path: "/", domain: "localhost", expires, httpOnly: true, signed: true });
+        res.cookie(COOKIE_NAME, token, { path: "/", domain: process.env.DOMAIN, expires, httpOnly: true, signed: true });
         return res.status(200).json({ message: "OK", name: user.name, email: user.email });
     }
     catch (error) {
@@ -90,7 +90,7 @@ export const logoutUser = async (req, res, next) => {
         res.clearCookie(COOKIE_NAME, {
             path: "/",
             httpOnly: true,
-            domain: "localhost",
+            domain: process.env.DOMNAIN,
             signed: true
         });
         console.log("cookie cleared.");
