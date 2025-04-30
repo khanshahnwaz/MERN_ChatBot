@@ -63,7 +63,7 @@ export const userLogin=async (req:Request,res:Response,next:NextFunction)=>{
         const user=await User.findOne({email:email})
         if(!user)return res.status(401).send("User not registered.");
         // now verify password
-        const isPasswordCorrect=await compare(password,user.password);
+        const isPasswordCorrect=await compare(password,user.password); 
         if(!isPasswordCorrect)return res.status(403).send("Incorrect Password .")
        
             // clear old cookie
@@ -83,9 +83,9 @@ export const userLogin=async (req:Request,res:Response,next:NextFunction)=>{
 
 
         return res.status(200).json({message:"OK",name:user.name,email:user.email})
-    }catch(error){
+    }catch(error){ 
         
-         return res.status(200).json({message:"ERROR",cause:error.message})
+         return res.status(500).json({message:"ERROR",cause:error.message})
     }
 }
 
