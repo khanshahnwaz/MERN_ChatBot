@@ -35,7 +35,7 @@ export const userSignUp = async (req, res, next) => {
         const token = createToken(user._id.toString(), user.email, "7d");
         const expires = new Date();
         expires.setDate(expires.getDate() + 7);
-        res.cookie(COOKIE_NAME, token, { path: "/", domain: process.env.DOMNAIN, expires, httpOnly: true, signed: true });
+        res.cookie(COOKIE_NAME, token, { path: "/", domain: process.env.DOMNAIN, expires, httpOnly: true, signed: true, secure: true, sameSite: 'none' });
         return res.status(201).json({ message: "OK", name: user.name, email: user.email });
     }
     catch (error) {
@@ -63,7 +63,7 @@ export const userLogin = async (req, res, next) => {
         const token = createToken(user._id.toString(), user.email, "7d");
         const expires = new Date();
         expires.setDate(expires.getDate() + 7);
-        res.cookie(COOKIE_NAME, token, { path: "/", domain: process.env.DOMAIN, expires, httpOnly: true, signed: true });
+        res.cookie(COOKIE_NAME, token, { path: "/", domain: process.env.DOMAIN, expires, httpOnly: true, signed: true, secure: true, sameSite: 'none' });
         return res.status(200).json({ message: "OK", name: user.name, email: user.email });
     }
     catch (error) {
